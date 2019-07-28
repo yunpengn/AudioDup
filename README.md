@@ -10,6 +10,18 @@ This repository presents my trivial approach for near-duplicate detection of aud
     - Fix a potential bug by [this](https://stackoverflow.com/questions/51578425/mysqlclient-instal-error-raise-exceptionwrong-mysql-configuration-maybe-htt).
 - Install `brew install portaudio && brew install ffmpeg`.
 - Install all dependencies with `pipenv install`.
+- Setup a databset & user for the program:
+
+```sql
+CREATE DATABASE dejavu;
+CREATE USER 'dejavu'@'localhost' IDENTIFIED BY 'dejavu';
+GRANT ALL PRIVILEGES ON dejavu.* TO 'dejavu'@'localhost';
+```
+
+## To Run the Program
+
+- Collect fingerprints by `pipenv shell python3 collect.py`.
+- 
 
 ## Licence
 
