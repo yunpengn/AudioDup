@@ -21,7 +21,14 @@ GRANT ALL PRIVILEGES ON dejavu.* TO 'dejavu'@'localhost';
 ## To Run the Program
 
 - Collect fingerprints by `pipenv shell python3 collect.py`.
-- 
+- Recognize sound from microphone by `pipenv shell python3 recognize.py`.
+
+## Testing
+
+- We would use the [FMA Dataset](https://github.com/mdeff/fma) to perform testing. To avoid wasting too much time & disk space, you do not have to download the whole dataset.
+- Put what you downloaded into the `data` folder.
+- Run `pipenv shell python3 collect.py` to collect all fingerprints.
+- Run `pipenv shell python3 test.py` to collect test results.
 
 ## Licence
 
