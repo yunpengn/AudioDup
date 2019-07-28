@@ -1,3 +1,6 @@
+# Musics source files
+data/*.mp3
+
 # MacOS specfic files
 .DS_Store
 
