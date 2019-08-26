@@ -2,6 +2,9 @@
 data/*.mp3
 tmp.mp3
 
+# Intellij IDEA specific files
+.idea/
+
 # MacOS specfic files
 .DS_Store
 

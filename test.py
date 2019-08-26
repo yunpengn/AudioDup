@@ -9,13 +9,13 @@ from pydub import AudioSegment
 
 # Database connection config.
 config = {
-	"database": {
-		"host": "localhost",
-		"user": "dejavu",
-		"passwd": "dejavu",
-		"db": "dejavu",
-	},
-	"database_type": "mysql",
+    "database": {
+        "host": "localhost",
+        "user": "dejavu",
+        "passwd": "dejavu",
+        "db": "dejavu",
+    },
+    "database_type": "mysql",
 }
 
 # Creates a new instance.
@@ -29,35 +29,35 @@ test_limit = 50
 file_names = glob.glob("data/*.mp3")
 
 for i in range(test_limit):
-	# Randomly selects an input file.
-	file_name = random.choice(file_names)
-	print("Iteration %s: read file %s." % (i, file_name))
+    # Randomly selects an input file.
+    file_name = random.choice(file_names)
+    print("Iteration %s: read file %s." % (i, file_name))
 
-	# Selects a random piece (5 - 14 seconds) from the given file.
-	song = AudioSegment.from_mp3(file_name)
-	start_point = random.randint(0, 14) * 1000
-	duration = random.randint(5, 14) * 1000
-	end_point = start_point + duration
-	print("Sliced song is from %s to %s." % (start_point, end_point))
+    # Selects a random piece (5 - 14 seconds) from the given file.
+    song = AudioSegment.from_mp3(file_name)
+    start_point = random.randint(0, 14) * 1000
+    duration = random.randint(5, 14) * 1000
+    end_point = start_point + duration
+    print("Sliced song is from %s to %s." % (start_point, end_point))
 
-	# Saves the sliced song to a file on disk.
-	sliced_song = song[start_point:end_point]
-	sliced_song.export("tmp.mp3", format="mp3")
-	print("The sliced song has been saved to tmp.mp3 temporarily.")
+    # Saves the sliced song to a file on disk.
+    sliced_song = song[start_point:end_point]
+    sliced_song.export("tmp.mp3", format="mp3")
+    print("The sliced song has been saved to tmp.mp3 temporarily.")
 
-	# Attempts to recognize the song.
-	result = djv.recognize(FileRecognizer, "tmp.mp3")
-	print("The result is %s" % result)
+    # Attempts to recognize the song.
+    result = djv.recognize(FileRecognizer, "tmp.mp3")
+    print("The result is %s" % result)
 
-	# Checks the prediction result.
-	original_song_name = os.path.splitext(os.path.basename(file_name))[0]
-	predicted_song_name = result['song_name'].decode()
-	if original_song_name == predicted_song_name:
-		correct_count += 1
+    # Checks the prediction result.
+    original_song_name = os.path.splitext(os.path.basename(file_name))[0]
+    predicted_song_name = result['song_name'].decode()
+    if original_song_name == predicted_song_name:
+        correct_count += 1
 
-	# Removes the file.
-	os.remove("tmp.mp3")
-	print("The temporary file at tmp.mp3 has been removed.")
-	print("====================================================\n")
+    # Removes the file.
+    os.remove("tmp.mp3")
+    print("The temporary file at tmp.mp3 has been removed.")
+    print("====================================================\n")
 
 print("Out of %s attempts, %s of them (%s%%) are correct." % (test_limit, correct_count, correct_count / test_limit * 100))
