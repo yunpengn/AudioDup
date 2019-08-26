@@ -26,7 +26,7 @@ correct_count = 0
 test_limit = 50
 
 # A list of all input song file names.
-file_names = glob.glob("data/*.mp3")
+file_names = glob.glob("data/audios/*.mp3")
 
 for i in range(test_limit):
     # Randomly selects an input file.
