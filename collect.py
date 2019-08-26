@@ -15,6 +15,6 @@ config = {
 djv = Dejavu(config)
 
 # Collects all songs.
-djv.fingerprint_directory("data/", [".mp3"])
+djv.fingerprint_directory("data/audios/", [".mp3"])
 
 print("We have collected %s fingerprints." % djv.db.get_num_fingerprints())
