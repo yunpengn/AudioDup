@@ -25,5 +25,6 @@ CREATE TABLE `fingerprints` (
 CREATE TABLE `md5` (
   `video_name` varchar(30) NOT NULL DEFAULT '' COMMENT 'video file name without folder & extension',
   `md5_val` char(32) NOT NULL DEFAULT '' COMMENT 'the md5 value in hex string representation',
-  PRIMARY KEY (`video_name`)
+  PRIMARY KEY (`video_name`),
+  INDEX `md5_val` (`md5_val`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
