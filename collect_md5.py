@@ -1,14 +1,21 @@
-import hashlib
+import csv
+import os
 
+insert_query = "INSERT INTO md5 (video_name, md5_val) VALUES ('%s', '%s');"
 
-# Generates the MD5 value (in hex string representation) of a file given its file name.
-def md5(file_name):
-    hash_md5 = hashlib.md5()
+# Reads from the csv file.
+queries = []
+with open('md5.csv') as file:
+    csv_file = csv.reader(file, delimiter=',')
 
-    # Reads the file in chunk of 4096 bytes.
-    with open(file_name, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
+    # Reads line by line.
+    for row in csv_file:
+        video_name = os.path.splitext(row[0])[0]
+        md5_val = row[1]
+        query = insert_query % (video_name, md5_val)
+        queries.append(query)
 
-    # Converts it to hex string format.
-    return hash_md5.hexdigest()
+# Writes the result to the given file.
+with open('md5.sql', 'a') as file:
+    for query in queries:
+        file.write(query + "\n")
