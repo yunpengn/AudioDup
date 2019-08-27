@@ -1,5 +1,8 @@
+import uuid
+
 from dejavu import Dejavu
-from dejavu.recognize import MicrophoneRecognizer
+from dejavu.recognize import FileRecognizer
+from pydub import AudioSegment
 
 # Database connection config.
 config = {
@@ -11,13 +14,22 @@ config = {
     },
     "database_type": "mysql",
 }
+mp3_temp_file_format = "%s.mp3"
 
 # Creates a new instance.
 djv = Dejavu(config)
 
-# Reads 10 seconds from microphone and recognize.
-song = djv.recognize(MicrophoneRecognizer, seconds=10)
-if song is None:
-    print("We are unable to recognize the song.")
-else:
-    print("Result: ", song)
+
+# Returns true if a potential duplicate is found for the sound track of the given MP4 file.
+def recognize_mp4(file_name):
+    video = AudioSegment.from_file(file_name, "mp4")
+    audio_file_name = mp3_temp_file_format % uuid.uuid4()
+    video.export(audio_file_name, format="mp3")
+
+    return recognize_mp3(audio_file_name)
+
+
+# Returns true if a potential duplicate is found for the given MP3 file.
+def recognize_mp3(file_name):
+    song = djv.recognize(FileRecognizer, file_name)
+    return song is None
