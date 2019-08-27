@@ -3,6 +3,7 @@ data/audios/
 data/videos/
 tmp1.mp3
 tmp2.mp3
+tmp3.mp3
 
 # Intellij IDEA specific files
 .idea/

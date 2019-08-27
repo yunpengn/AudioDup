@@ -40,12 +40,15 @@ config = {
 djv = Dejavu(config)
 
 # The number of iterations in the test.
-cut_correct_count = 0
-noise_correct_count = 0
+cut_count = 0
+strong_noise_count = 0
+weak_noise_count = 0
 test_limit = 50
 min_length = 2000
-noise_partition = 5
-noise_volume_decrease = 10
+strong_noise_max = 7
+strong_noise_volume = 10
+weak_noise_max = 2
+weak_noise_volume = 25
 
 # A list of all input song file names.
 file_names = glob.glob("data/audios/*.mp3")
@@ -75,26 +78,41 @@ for i in range(test_limit):
 
     # Attempts to recognize.
     if recognize_from_file("tmp1.mp3", original_song_name):
-        cut_correct_count += 1
+        cut_count += 1
 
-    # Creates a noise of at most a certain length.
-    noise_duration = random.randint(0, duration // noise_partition)
+    # Creates a strong noise.
+    noise_duration = random.randint(0, duration // strong_noise_max)
     noise = WhiteNoise().to_audio_segment(noise_duration)
-    decreased_noise = noise - noise_volume_decrease
+    decreased_noise = noise - strong_noise_volume
 
     # Adds noise to the sound.
     start_point = random.randint(0, duration - noise_duration)
-    noise_song = sliced_song.overlay(noise, position=start_point)
+    noise_song = sliced_song.overlay(decreased_noise, position=start_point)
     noise_song.export("tmp2.mp3", format="mp3")
 
     # Attempts to recognize.
     if recognize_from_file("tmp2.mp3", original_song_name):
-        noise_correct_count += 1
+        strong_noise_count += 1
+
+    # Creates a weak noise.
+    noise_duration = random.randint(0, duration // weak_noise_max)
+    noise = WhiteNoise().to_audio_segment(noise_duration)
+    decreased_noise = noise - weak_noise_volume
+
+    # Adds noise to the sound.
+    start_point = random.randint(0, duration - noise_duration)
+    noise_song = sliced_song.overlay(decreased_noise, position=start_point)
+    noise_song.export("tmp3.mp3", format="mp3")
+
+    if recognize_from_file("tmp3.mp3", original_song_name):
+        weak_noise_count += 1
     print("====================================================\n")
 
 print("==================== Report ========================")
-print("Song being cut:  %s%% (%s / %s) is correct."
-      % (cut_correct_count / test_limit * 100, cut_correct_count, test_limit))
-print("Song with noise: %s%% (%s / %s) is correct."
-      % (cut_correct_count / test_limit * 100, cut_correct_count, test_limit))
+print("Song being cut:    %s%% (%s / %s) is correct."
+      % (cut_count / test_limit * 100, cut_count, test_limit))
+print("With strong noise: %s%% (%s / %s) is correct."
+      % (strong_noise_count / test_limit * 100, strong_noise_count, test_limit))
+print("With weak noise:   %s%% (%s / %s) is correct."
+      % (weak_noise_count / test_limit * 100, weak_noise_count, test_limit))
 print("====================================================")
