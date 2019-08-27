@@ -1,7 +1,8 @@
 # Musics source files
 data/audios/
 data/videos/
-tmp.mp3
+tmp1.mp3
+tmp2.mp3
 
 # Intellij IDEA specific files
 .idea/

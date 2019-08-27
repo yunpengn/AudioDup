@@ -17,4 +17,7 @@ djv = Dejavu(config)
 
 # Reads 10 seconds from microphone and recognize.
 song = djv.recognize(MicrophoneRecognizer, seconds=10)
-print("Result: ", song)
+if song is None:
+    print("We are unable to recognize the song.")
+else:
+    print("Result: ", song)
