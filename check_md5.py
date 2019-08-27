@@ -22,5 +22,9 @@ def check_md5_exists(file_name):
     cursor.execute(query)
     results = cursor.fetchall()
 
+    # Closes the connection.
+    cursor.close()
+    db.close()
+
     # Returns true if there exists an file with the same MD5 value.
     return len(results) != 0
