@@ -40,10 +40,12 @@ config = {
 djv = Dejavu(config)
 
 # The number of iterations in the test.
-correct_count = 0
+cut_correct_count = 0
+noise_correct_count = 0
 test_limit = 50
-min_length = 1000
+min_length = 2000
 noise_partition = 5
+noise_volume_decrease = 10
 
 # A list of all input song file names.
 file_names = glob.glob("data/audios/*.mp3")
@@ -73,11 +75,12 @@ for i in range(test_limit):
 
     # Attempts to recognize.
     if recognize_from_file("tmp1.mp3", original_song_name):
-        correct_count += 1
+        cut_correct_count += 1
 
     # Creates a noise of at most a certain length.
     noise_duration = random.randint(0, duration // noise_partition)
     noise = WhiteNoise().to_audio_segment(noise_duration)
+    decreased_noise = noise - noise_volume_decrease
 
     # Adds noise to the sound.
     start_point = random.randint(0, duration - noise_duration)
@@ -86,8 +89,12 @@ for i in range(test_limit):
 
     # Attempts to recognize.
     if recognize_from_file("tmp2.mp3", original_song_name):
-        correct_count += 1
+        noise_correct_count += 1
     print("====================================================\n")
 
-print("Out of %s attempts, %s of them (%s%%) are correct."
-      % (test_limit, correct_count, correct_count / test_limit * 2 * 100))
+print("==================== Report ========================")
+print("Song being cut:  %s%% (%s / %s) is correct."
+      % (cut_correct_count / test_limit * 100, cut_correct_count, test_limit))
+print("Song with noise: %s%% (%s / %s) is correct."
+      % (cut_correct_count / test_limit * 100, cut_correct_count, test_limit))
+print("====================================================")
