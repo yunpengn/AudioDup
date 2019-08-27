@@ -24,6 +24,7 @@ djv = Dejavu(config)
 # The number of iterations in the test.
 correct_count = 0
 test_limit = 50
+min_length = 1000
 
 # A list of all input song file names.
 file_names = glob.glob("data/audios/*.mp3")
@@ -33,10 +34,15 @@ for i in range(test_limit):
     file_name = random.choice(file_names)
     print("Iteration %s: read file %s." % (i, file_name))
 
-    # Selects a random piece (5 - 14 seconds) from the given file.
+    # Reads the song.
     song = AudioSegment.from_mp3(file_name)
-    start_point = random.randint(0, 14) * 1000
-    duration = random.randint(5, 14) * 1000
+    if len(song) <= min_length:
+        print("The given song is too short. Will skip.")
+        continue
+
+    # Selects a random piece from the given file.
+    duration = random.randint(1000, len(song))
+    start_point = random.randint(0, len(song) - duration)
     end_point = start_point + duration
     print("Sliced song is from %s to %s." % (start_point, end_point))
 
