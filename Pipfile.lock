@@ -120,7 +120,7 @@
         "pydejavu": {
             "editable": true,
             "git": "https://github.com/yunpengn/dejavu",
-            "ref": "97f8419067572fb6cd5b5ab6c3d1e23183a4b702"
+            "ref": "9d52f0f527da4330bf1d93f81ef51819ede28600"
         },
         "pydub": {
             "hashes": [

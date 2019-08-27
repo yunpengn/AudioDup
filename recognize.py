@@ -32,4 +32,11 @@ def recognize_mp4(file_name):
 # Returns true if a potential duplicate is found for the given MP3 file.
 def recognize_mp3(file_name):
     song = djv.recognize(FileRecognizer, file_name)
+    print("Recognition result is %s" % song)
+    return song is None
+
+
+def recognize_mp3_for_song(file_name, song_id):
+    song = djv.recognize_for_song(FileRecognizer, file_name, song_id)
+    print("Recognition result is %s" % song)
     return song is None
