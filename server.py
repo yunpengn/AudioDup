@@ -27,8 +27,17 @@ def upload_video():
     f.save(file_name)
 
     # Returns the result.
-    check_result = check_duplicate(file_name)
-    return render_template('result.html', result=check_result)
+    result = check_duplicate(file_name)
+    overall_video = result[0][0][0] if len(result[0]) > 0 else ''
+    overall_score = result[0][0][1] if len(result[0]) > 0 else ''
+    video_video = result[1][0][0] if len(result[1]) > 0 else ''
+    video_score = result[1][0][1] if len(result[1]) > 0 else ''
+    audio_video = result[2][0][0] if len(result[2]) > 0 else ''
+    audio_score = result[2][0][1] if len(result[2]) > 0 else ''
+    return render_template('result.html',
+                           overall_video=overall_video, overall_score=overall_score,
+                           video_video=video_video, video_score=video_score,
+                           audio_video=audio_video, audio_score=audio_score)
 
 
 # Calls other functions to check whether there exists
