@@ -22,7 +22,6 @@ def check_md5_exists(file_name):
     # Queries the database.
     cursor.execute(query)
     results = cursor.fetchall()
-    print(results)
 
     # Closes the connection.
     cursor.close()
