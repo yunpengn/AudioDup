@@ -33,6 +33,12 @@ def collect_mp4(file_name):
     djv.fingerprint_file(audio_file_name)
 
 
+# Removes the fingerprints of a given song name from database.
+def remove_mp4(file_name):
+    song_name = os.path.splitext(os.path.basename(file_name))[0]
+    pass
+
+
 # Returns true if a potential duplicate is found for the sound track of the given MP4 file.
 def recognize_mp4(file_name):
     # Extracts audio.
@@ -47,7 +53,10 @@ def recognize_mp4(file_name):
     # Returns the result.
     return_val = []
     if result is not None and result['confidence'] > confidence_threshold:
-        return_val.append([result['song_name'], result['confidence'] / result['fingerprint_count']])
+        is_similar = 0
+        if result['confidence'] > confidence_threshold:
+            is_similar = 1
+        return_val.append([result['song_name'], is_similar, result['confidence']])
     return return_val
 
 
