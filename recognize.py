@@ -51,6 +51,3 @@ def recognize_mp3_for_song(song_id, file_name):
     song = djv.recognize_for_song(FileRecognizer, song_id, file_name)
     print("Recognition result is %s" % song)
     return song is None
-
-
-print(recognize_mp4("data/videos/6522936861751512324.mp4"))
