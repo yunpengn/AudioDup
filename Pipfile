@@ -6,12 +6,16 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+ffmpeg-python = "*"
+matplotlib = "*"
 mysqlclient = "*"
 numpy = "*"
-scipy = "*"
+opencv-python = "*"
+pandas = "*"
+pillow = "*"
 pydub = "*"
 pyaudio = "*"
-matplotlib = "*"
+scipy = "*"
 wavio = "*"
 pydejavu = {editable = true,git = "https://github.com/yunpengn/dejavu"}
 
