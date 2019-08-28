@@ -56,7 +56,7 @@ def recognize_mp4(file_name):
         is_similar = 0
         if result['confidence'] > confidence_threshold:
             is_similar = 1
-        return_val.append([result['song_name'], is_similar, result['confidence']])
+        return_val.append([result['song_name'].decode('utf-8'), is_similar, result['confidence']])
     return return_val
 
 
