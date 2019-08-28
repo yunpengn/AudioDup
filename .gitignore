@@ -1,6 +1,7 @@
 # Musics source files
 data/audios/
 data/videos/
+templates/videos/
 upload/
 tmp1.mp3
 tmp2.mp3
