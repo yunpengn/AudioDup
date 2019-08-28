@@ -4,7 +4,7 @@ import os
 from flask import Flask, render_template, request
 
 # Creates a Flask app.
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, static_folder='templates', template_folder='templates')
 
 # Defines the upload folder.
 upload_folder = "upload/"
