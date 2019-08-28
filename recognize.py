@@ -22,6 +22,17 @@ mp3_temp_file_format = "%s.mp3"
 djv = Dejavu(config)
 
 
+# Collects a new audio from a given MP4 file and inserts fingerprints into database.
+def collect_mp4(file_name):
+    # Extracts the audio.
+    video = AudioSegment.from_file(file_name, "mp4")
+    audio_file_name = mp3_temp_file_format % uuid.uuid4()
+    video.export(audio_file_name, format="mp3")
+
+    # Collects the audio.
+    djv.fingerprint_file(audio_file_name)
+
+
 # Returns true if a potential duplicate is found for the sound track of the given MP4 file.
 def recognize_mp4(file_name):
     # Extracts audio.
