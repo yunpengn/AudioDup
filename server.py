@@ -32,4 +32,4 @@ def upload_video():
 
 # Only runs the routing when the current file is being run.
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=80)
