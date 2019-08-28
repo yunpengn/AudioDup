@@ -36,7 +36,7 @@ def recognize_mp4(file_name):
     # Returns the result.
     return_val = []
     if result is not None and result['confidence'] > confidence_threshold:
-        return_val.append([result['song_name'], result['confidence']])
+        return_val.append([result['song_name'], result['confidence'] / result['fingerprint_count']])
     return return_val
 
 

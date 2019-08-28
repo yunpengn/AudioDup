@@ -282,7 +282,7 @@
         "pydejavu": {
             "editable": true,
             "git": "https://github.com/yunpengn/dejavu",
-            "ref": "37b51e12019a2352327649e54b6eef0e4ffa94b5"
+            "ref": "db1cf6e8b06417006c368fb0929dd483c62a88df"
         },
         "pydub": {
             "hashes": [
