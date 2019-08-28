@@ -36,7 +36,7 @@ def recognize_mp3(file_name):
     return song is None
 
 
-def recognize_mp3_for_song(file_name, song_id):
-    song = djv.recognize_for_song(FileRecognizer, file_name, song_id)
+def recognize_mp3_for_song(song_id, file_name):
+    song = djv.recognize_for_song(FileRecognizer, song_id, file_name)
     print("Recognition result is %s" % song)
     return song is None
