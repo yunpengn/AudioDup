@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder='templates')
 # Defines the health check endpoint.
 @app.route('/')
 def hello_world():
-    return 'We love ByteDance!'
+    return render_template('index.html')
 
 # Defines the file upload endpoint.
 @app.route('/upload', methods=['GET', 'POST'])
