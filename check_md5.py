@@ -4,7 +4,8 @@ import MySQLdb
 check_query = "SELECT * FROM md5 WHERE md5_val = '%s'"
 
 
-# Checks whether there exists a file with the same MD5 value.
+# Checks whether there exists a file with the same MD5 value. Returns the file name
+# without extension in string format if found, else return None.
 def check_md5_exists(file_name):
     # Calculates the MD5.
     hash_md5 = hashlib.md5()
@@ -21,10 +22,13 @@ def check_md5_exists(file_name):
     # Queries the database.
     cursor.execute(query)
     results = cursor.fetchall()
+    print(results)
 
     # Closes the connection.
     cursor.close()
     db.close()
 
-    # Returns true if there exists an file with the same MD5 value.
-    return len(results) != 0
+    # Returns the result.
+    if len(results) == 0:
+        return None
+    return results[0][0]
