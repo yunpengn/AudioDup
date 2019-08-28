@@ -1,3 +1,5 @@
+import uuid
+
 from flask import Flask, render_template, request
 
 # Creates a Flask app.
@@ -17,7 +19,8 @@ def upload_video():
 
     # Retrieves the uploaded file from request and saves.
     f = request.files['video_file']
-    f.save()
+    file_name = str(uuid.uuid4())
+    f.save(file_name)
     return 'Hi!'
 
 
