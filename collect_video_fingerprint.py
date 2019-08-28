@@ -11,13 +11,15 @@ with open('video_hash.csv') as file:
 
     # Reads line by line.
     for row in csv_file:
-        video_name = os.path.splitext(row[0])[0]
-        frame_id = row[1]
-        hash_type = row[2]
-        hash_value = json.dumps(row[3])
+        without_ext = os.path.splitext(row[1])[0]
+        video_name = without_ext.split("/")[1]
+        frame_id = without_ext.split("/")[2]
 
-        query = insert_query % (video_name, frame_id, hash_type, hash_value)
-        queries.append(query)
+        for i in range(3):
+            hash_type = i
+            hash_value = row[i + 2]
+            query = insert_query % (video_name, frame_id, hash_type, hash_value)
+            queries.append(query)
 
 # Writes the result to the given file.
 with open('video_hash.sql', 'a') as file:

@@ -6,6 +6,8 @@ tmp2.mp3
 tmp3.mp3
 md5.csv
 md5.sql
+video_hash.csv
+video_hash.sql
 
 # Intellij IDEA specific files
 .idea/

@@ -35,7 +35,7 @@ CREATE TABLE `video_hash` (
   `video_name` VARCHAR(30) NOT NULL DEFAULT '' COMMENT 'video file name without folder & extension',
   `frame_id` SMALLINT NOT NULL DEFAULT 0 COMMENT 'frame ID inside the video',
   `hash_type` TINYINT NOT NULL DEFAULT 0 COMMENT 'the type of the hash value in this row',
-  `hash_value` VARCHAR(10000) NOT NULL DEFAULT '' COMMENT 'the hash value in json string format',
+  `hash_value` VARCHAR(2000) NOT NULL DEFAULT '' COMMENT 'the hash value in json string format',
   PRIMARY KEY (`id`),
   INDEX `video_frame` (`video_name`, `frame_id`, `hash_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
