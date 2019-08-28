@@ -27,7 +27,13 @@ def upload_video():
     f.save(file_name)
 
     # Returns the result.
-    return 'Hi!'
+    check_result = check_duplicate(file_name)
+    return render_template('result.html', result=check_result)
+
+
+# Calls other functions to check whether there exists
+def check_duplicate(file_name):
+    pass
 
 
 # Only runs the routing when the current file is being run.
