@@ -23,7 +23,8 @@ def upload_video():
 
     # Retrieves the uploaded file from request and saves.
     f = request.files['video_file']
-    file_name = os.path.join(app.root_path, upload_folder, str(uuid.uuid4()))
+    uuid_val = str(uuid.uuid4())
+    file_name = os.path.join(app.root_path, upload_folder, uuid_val)
     f.save(file_name)
 
     # Returns the result.
@@ -34,7 +35,7 @@ def upload_video():
     video_score = result[1][0][1] if len(result[1]) > 0 else ''
     audio_video = result[2][0][0] if len(result[2]) > 0 else ''
     audio_score = result[2][0][1] if len(result[2]) > 0 else ''
-    return render_template('result.html',
+    return render_template('result.html', origin_video = uuid_val,
                            overall_video=overall_video, overall_score=overall_score,
                            video_video=video_video, video_score=video_score,
                            audio_video=audio_video, audio_score=audio_score)

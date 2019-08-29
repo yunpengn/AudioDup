@@ -6,6 +6,8 @@ upload/
 tmp1.mp3
 tmp2.mp3
 tmp3.mp3
+max_pooling.npy
+max_pooling.sql
 md5.csv
 md5.sql
 video_hash.csv

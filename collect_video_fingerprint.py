@@ -1,5 +1,4 @@
 import csv
-import json
 import os
 
 insert_query = "INSERT INTO video_hash (video_name, frame_id, hash_type, hash_value) VALUES ('%s', %s, %s, '%s');"
